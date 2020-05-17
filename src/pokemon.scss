@@ -1,0 +1,71 @@
+.pokemons{
+    img {
+        width: 16rem;
+        padding: 2rem;
+    }
+    span{
+        text-align: center;
+    text {
+        text-align: center;
+    }
+}
+.btn-secondary{
+    background: transparent!important;
+    border: none;
+    transition: transform .9s;
+    &:focus{
+        border: none;
+        box-shadow: none;
+    }
+}
+&:hover{
+    transform: scale(1.1);
+}
+ul{
+    list-style: none;
+    padding: 0;
+    p {
+        font-size: small;
+    }
+    b{
+        color:royalblue;
+    }
+    li{
+        color: goldenrod;
+    }
+    .evolution{
+        li{
+            padding-left: 2rem;
+            font-size: small;
+        }
+    }
+}
+.pokemon_name{
+    text-align: center;
+    border-bottom: thin solid gray;
+    color:saddlebrown;
+    font-weight: 900;
+}
+.card{
+    background-color: indigo;
+}
+}
+.container-fluid{
+    padding: 0!important;
+    .bg-light {
+        background-color: red !important;
+    }
+    .navbar-light{
+        .navbar-brand{
+          color: white;
+        }
+
+    }
+}
+.pokemon-nav{
+    font-weight: bolder;
+    font-size: medium;
+    img{
+        width: 3rem;
+    }
+}
