@@ -1,14 +1,26 @@
 .pokemons{
-    img {
+
+.pokemon-img {
         width: 16rem;
         padding: 2rem;
-    }
-    span{
-        text-align: center;
+}
+.pokemon-card-veiw {
+    box-shadow: 0 4px 8px 0 grey;
+    transition: 0.3s;
+    margin-top: 2.5rem;
+}
+
+.pokemon-name{
+    display: flex;
+    flex-wrap: nowrap;
     text {
-        text-align: center;
+    text-align: center;
+    padding: 2rem;
+    flex: 26%;
+    color: red;
     }
 }
+
 .btn-secondary{
     background: transparent!important;
     border: none;
@@ -16,10 +28,6 @@
     &:focus{
         border: none;
         box-shadow: none;
-    }
-    .delete{
-        color: red;
-        text-shadow: 0 1px 0 red   
     }
 }
 &:hover{
@@ -55,6 +63,7 @@ ul{
 }
 }
 .container-fluid{
+    
     padding: 0!important;
     .bg-light {
         background-color: red !important;
@@ -64,6 +73,22 @@ ul{
           color: white;
         }
 
+    }
+    .container{
+        padding-top: 2rem;
+    }
+    .pokemon-add{
+      flex-shrink: 0;
+      box-shadow: 0 4px 8px 0 grey;
+      transition: 0.3s;
+      border-radius: 50%;
+      background-color: transparent;
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      &:hover{
+          background-color: white;
+      }
     }
 }
 .pokemon-nav{

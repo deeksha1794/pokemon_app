@@ -4,8 +4,9 @@ import { PokemonState } from "./reducers/pokemon";
 import { connect } from 'react-redux';
 import { getPokemons, deletePokemon } from './action/pokemon';
 import { Home } from './main/home';
-import { Container } from 'reactstrap';
+import { Container, Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import NavBar from './main/nav-bar';
+import AddPokemonForm from './main/add-pokemon-form';
 
 
 interface DispatchProps {
@@ -17,27 +18,58 @@ interface StateProps {
   pokemonState: PokemonState
 }
 interface Props extends StateProps, DispatchProps { }
-interface State { }
+interface State {
+  isOpen: boolean;
+ }
 
 class App extends React.Component<Props, State> {
+
+ public constructor(props: Props){
+   super(props);
+   this.state = {
+     isOpen: false
+   }
+ }
 
   public componentWillMount() {
     this.props.getPokemon();
   }
   public render(): JSX.Element {
+    const {isOpen} = this.state;
     return (
       <Container className="themed-container" fluid={true}>
         <header >
           <NavBar />
         </header>
-        <Container><Home pokemons={this.props.pokemonState.pokemons} onClickHandler={this.onClickHandler} /></Container>
+        <Container>
+          <div>
+        <Button className="pokemon-add" color="danger" onClick={this.onToggleHandler}>
+          <img src={require("./icons/add_icon.png")} alt="add"/>
+          </Button>
+        <Modal isOpen={isOpen} toggle={this.onToggleHandler} >
+        <ModalHeader toggle={this.onToggleHandler}>Welcome to Family</ModalHeader>
+        <ModalBody>
+          <AddPokemonForm />
+        </ModalBody>
+      </Modal>
+      </div>
+          <Home pokemons={this.props.pokemonState.pokemons} onClickHandler={this.onClickHandler} />
+          </Container>
       </Container>
     );
   }
   private onClickHandler = (e, Element) => {
+    e.stopPropagation()
     this.props.deletePokemon(Element.pkdx_id)
   }
+private onToggleHandler =(e) => {
+  this.setState({
+    isOpen: !this.state.isOpen
+  })
+  console.log(e)
 }
+}
+
 function mapStateToProps(state: any): StateProps {
   return {
     pokemonState: state.pokemon

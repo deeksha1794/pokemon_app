@@ -6,13 +6,6 @@ export interface RequestState {
   loadError?: Error;
 }
 
-/**
- * This is an experimental approach to a generic reducer for a request-response pattern of actions that
- * results in some entity being set in state or a failure.
- * @param requestType
- * @param initialState
- * @returns {(state:T, action:Action)=>T}
- */
 export function createRequestReducer<T>(requestType: RequestType, initialState: T): any {
   return (state: T = initialState, action: StandardAction): T => {
     switch (action.type) {

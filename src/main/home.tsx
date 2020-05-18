@@ -10,13 +10,21 @@ interface Props {
 export const Home = (props: Props): JSX.Element => {
   const { pokemons } = props;
 
-  return (<Row>{pokemons && pokemons.length ? pokemons.map((element, index) => {
+  return (
+  <Row>
+    {pokemons && pokemons.length ? pokemons.map((element, index) => {
     return (<Col xs={3} key={index} className={"pokemons"}>
-      <Button close className="delete" onClick={(e) => props.onClickHandler(e, element)} />
+      <div className="pokemon-card-veiw">
       <Button id={element.name}>
-        <img src={element.art_url} alt={element.name} />
-        <Col xs={{ offset: 6 }}><text>{element.name}</text></Col>
-      </Button>
+        <img src={element.art_url} className="pokemon-img" alt={element.name} />
+        </Button>
+        <Col xs={ 12} className="pokemon-name">
+          <text>{element.name}</text>
+         <Button className="delete" onClick={(e) => props.onClickHandler(e, element)}>
+         <img className="pull-right"  src={require("../icons/delete_icon.png")} alt="delete"/>
+         </Button>
+        </Col>
+        </div>
       <UncontrolledCollapse toggler={`#${element.name}`}>
         <Card>
           <CardBody>
