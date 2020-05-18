@@ -8,7 +8,7 @@ const NavBar = (props) => {
     return (
         <div className="pokemon-nav">
             <Navbar color="light" light expand="md">
-                <NavbarBrand href="/"><img src={require("../025.png")} alt={"icon"} />Pokemon</NavbarBrand>
+                <NavbarBrand href="/"><img src={require("../icons/025.png")} alt={"icon"} />Pokemon</NavbarBrand>
             </Navbar>
         </div>
     );

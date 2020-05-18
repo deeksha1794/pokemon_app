@@ -6,7 +6,7 @@ export interface PokemonState extends RequestState {
   pokemons?: any;
 }
 
-const INITIAL_STATE: PokemonState = { };
+const INITIAL_STATE: PokemonState = {};
 
 export default (state: PokemonState = INITIAL_STATE, action: any) => {
   switch (action.type) {
@@ -16,27 +16,24 @@ export default (state: PokemonState = INITIAL_STATE, action: any) => {
       return Object.assign({}, state, { inProgress: true });
 
     case EDIT_POKEMON.REQUEST:
-      return Object.assign({}, state, action.payload, { inProgress: false, error : undefined });
+      return Object.assign({}, state, action.payload, { inProgress: false, error: undefined });
 
     case GET_POKEMON.SUCCESS:
-      return Object.assign({}, state, action.payload, { inProgress: false, error : undefined });
+      return Object.assign({}, state, action.payload, { inProgress: false, error: undefined });
 
     case CREATE_POKEMON.SUCCESS:
       const { pokemon } = action.payload;
       if (state.pokemons) {
         state.pokemons.splice(0, 0, pokemon);
-        return Object.assign({}, state, { inProgress: false, error : undefined });
+        return Object.assign({}, state, { inProgress: false, error: undefined });
       }
-   break;
+      break;
     case DELETE_POKEMON.SUCCESS:
       const { id } = action.payload;
-      for (let i = 0, len = state.pokemons.length; i < len; i++) {
-        if (state.pokemons[i].id === id) {
-          state.pokemons.splice(i, 1);
-          break;
-        }
-      }
-      return Object.assign({}, state, { inProgress: false, error : undefined });
+      state.pokemons.filter((data) => {
+      return data.pkdx_id === id && state.pokemons.splice(state.pokemons.indexOf(data), 1)
+      })
+      return Object.assign({}, state, { inProgress: false, error: undefined });
 
     case CREATE_POKEMON.FAILURE:
     case DELETE_POKEMON.FAILURE:

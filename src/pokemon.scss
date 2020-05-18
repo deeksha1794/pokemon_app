@@ -17,6 +17,10 @@
         border: none;
         box-shadow: none;
     }
+    .delete{
+        color: red;
+        text-shadow: 0 1px 0 red   
+    }
 }
 &:hover{
     transform: scale(1.1);

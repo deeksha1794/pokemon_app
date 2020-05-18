@@ -2,7 +2,7 @@ import React from 'react';
 import { ActionCreator } from './action/action';
 import { PokemonState } from "./reducers/pokemon";
 import { connect } from 'react-redux';
-import { getPokemons } from './action/pokemon';
+import { getPokemons, deletePokemon } from './action/pokemon';
 import { Home } from './main/home';
 import { Container } from 'reactstrap';
 import NavBar from './main/nav-bar';
@@ -10,6 +10,7 @@ import NavBar from './main/nav-bar';
 
 interface DispatchProps {
   getPokemon: ActionCreator;
+  deletePokemon: ActionCreator;
 }
 
 interface StateProps {
@@ -29,9 +30,12 @@ class App extends React.Component<Props, State> {
         <header >
           <NavBar />
         </header>
-        <Container><Home pokemons={this.props.pokemonState.pokemons} /></Container>
+        <Container><Home pokemons={this.props.pokemonState.pokemons} onClickHandler={this.onClickHandler} /></Container>
       </Container>
     );
+  }
+  private onClickHandler = (e, Element) => {
+    this.props.deletePokemon(Element.pkdx_id)
   }
 }
 function mapStateToProps(state: any): StateProps {
@@ -41,5 +45,6 @@ function mapStateToProps(state: any): StateProps {
 }
 
 export default connect<StateProps, DispatchProps>(mapStateToProps, {
-  getPokemon: getPokemons.request
+  getPokemon: getPokemons.request,
+  deletePokemon: deletePokemon.request
 })(App);
