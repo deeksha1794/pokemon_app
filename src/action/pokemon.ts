@@ -84,30 +84,3 @@ export const deletePokemon = {
     };
   }
 };
-
-export const editPokemon = {
-  request: (pokemon: any): StandardAction => {
-    return {
-      type: EDIT_POKEMON.REQUEST,
-      payload: {
-        pokemon
-      }
-    };
-  },
-  success: (pokemon: any): StandardAction => {
-    return {
-      type: EDIT_POKEMON.SUCCESS,
-      payload: {
-        pokemon
-      }
-    };
-  },
-  failure: (error: Error): StandardAction => {
-    return {
-      type: EDIT_POKEMON.FAILURE,
-      payload: {
-        error
-      }
-    };
-  }
-};

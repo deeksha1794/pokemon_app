@@ -2,7 +2,7 @@ import React from 'react';
 import { ActionCreator } from './action/action';
 import { PokemonState } from "./reducers/pokemon";
 import { connect } from 'react-redux';
-import { getPokemons, deletePokemon } from './action/pokemon';
+import { getPokemons, deletePokemon, createPokemon } from './action/pokemon';
 import { Home } from './main/home';
 import { Container, Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import NavBar from './main/nav-bar';
@@ -12,6 +12,7 @@ import AddPokemonForm from './main/add-pokemon-form';
 interface DispatchProps {
   getPokemon: ActionCreator;
   deletePokemon: ActionCreator;
+  createPokemon: ActionCreator;
 }
 
 interface StateProps {
@@ -46,10 +47,10 @@ class App extends React.Component<Props, State> {
         <Button className="pokemon-add" color="danger" onClick={this.onToggleHandler}>
           <img src={require("./icons/add_icon.png")} alt="add"/>
           </Button>
-        <Modal isOpen={isOpen} toggle={this.onToggleHandler} >
+        <Modal  isOpen={isOpen} toggle={this.onToggleHandler} >
         <ModalHeader toggle={this.onToggleHandler}>Welcome to Family</ModalHeader>
-        <ModalBody>
-          <AddPokemonForm />
+        <ModalBody className="form-modal">
+          <AddPokemonForm onSubmit={this.onSubmitHandler}/>
         </ModalBody>
       </Modal>
       </div>
@@ -62,11 +63,14 @@ class App extends React.Component<Props, State> {
     e.stopPropagation()
     this.props.deletePokemon(Element.pkdx_id)
   }
-private onToggleHandler =(e) => {
+private onToggleHandler =() => {
   this.setState({
     isOpen: !this.state.isOpen
   })
-  console.log(e)
+}
+private onSubmitHandler =(data) => {
+  this.props.createPokemon(data);
+  this.onToggleHandler();
 }
 }
 
@@ -78,5 +82,6 @@ function mapStateToProps(state: any): StateProps {
 
 export default connect<StateProps, DispatchProps>(mapStateToProps, {
   getPokemon: getPokemons.request,
-  deletePokemon: deletePokemon.request
+  deletePokemon: deletePokemon.request,
+  createPokemon: createPokemon.request
 })(App);

@@ -11,6 +11,8 @@ const INITIAL_STATE: PokemonState = {};
 export default (state: PokemonState = INITIAL_STATE, action: any) => {
   switch (action.type) {
     case CREATE_POKEMON.REQUEST:
+      action.payload.pokemon ={...action.payload.pokemon, id: state.pokemons.length+1 , pkdx_id:state.pokemons.length+1 }
+      return Object.assign({}, state, action.payload, { inProgress: true, error: undefined });
     case DELETE_POKEMON.REQUEST:
     case GET_POKEMON.REQUEST:
       return Object.assign({}, state, { inProgress: true });

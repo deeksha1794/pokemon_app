@@ -1,10 +1,11 @@
 import React from 'react';
 import { Col, Row, UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
+import { PokemonData } from '../interfaces/pokemon';
 
 
 interface Props {
-  pokemons: any;
-  onClickHandler: (e: Event, element: any) => void;
+  pokemons: PokemonData[];
+  onClickHandler: (e: Event, element: PokemonData) => void;
 }
 
 export const Home = (props: Props): JSX.Element => {
@@ -19,7 +20,7 @@ export const Home = (props: Props): JSX.Element => {
         <img src={element.art_url} className="pokemon-img" alt={element.name} />
         </Button>
         <Col xs={ 12} className="pokemon-name">
-          <text>{element.name}</text>
+          <h6>{element.name}</h6>
          <Button className="delete" onClick={(e) => props.onClickHandler(e, element)}>
          <img className="pull-right"  src={require("../icons/delete_icon.png")} alt="delete"/>
          </Button>

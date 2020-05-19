@@ -13,7 +13,7 @@
 .pokemon-name{
     display: flex;
     flex-wrap: nowrap;
-    text {
+    h6 {
     text-align: center;
     padding: 2rem;
     flex: 26%;
@@ -89,6 +89,15 @@ ul{
       &:hover{
           background-color: white;
       }
+      &:focus{
+        background-color:transparent;
+      }
+      &::after{
+        background-color:transparent;
+      }
+      &:active{
+        background-color: white;
+      }
     }
 }
 .pokemon-nav{
@@ -96,5 +105,32 @@ ul{
     font-size: medium;
     img{
         width: 3rem;
+    }
+}
+.form-modal{
+    background-image: url(./icons/025.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
+    ul{
+        list-style: none;
+        padding: 0;
+    }
+    button{
+        background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 50%;
+    &:hover{
+        background-color: transparent;
+        box-shadow: none;
+    }
+    &:focus{
+        background-color: transparent;
+        box-shadow: none;
+    }
+    img{
+        width: 2rem;
+    }
     }
 }

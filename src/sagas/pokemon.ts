@@ -2,7 +2,7 @@ import { call, put, takeEvery, select } from "redux-saga/effects";
 
 import { SagaIterator } from "redux-saga";
 
-import { GET_POKEMON, getPokemons, deletePokemon, DELETE_POKEMON } from "../action/pokemon";
+import { GET_POKEMON, getPokemons, deletePokemon, DELETE_POKEMON, CREATE_POKEMON, createPokemon } from "../action/pokemon";
 
 
 declare const fetch: any;
@@ -47,6 +47,27 @@ function deletePokemonValue(serviceUrl: any, id: string): any {
     });
 }
 
+function createPokemonValue(serviceUrl: any, pokemon: any): any {
+  return fetch(serviceUrl , {
+    method: "POST",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(pokemon)
+  }).then((response: any) => response.json())
+    .then((responseJson: any) => {
+      if (!responseJson.statusCode) {
+        return responseJson;
+      } else {
+        throw new Error(responseJson.message);
+      }
+    })
+    .catch((error: Error) => {
+      throw new Error(error.message);
+    });
+}
+
 export function* getAll(action: any): IterableIterator<{}> {
   const serviceUrl = yield select(getServiceUrl);
 
@@ -71,6 +92,17 @@ export function* deleteOne(action: any): IterableIterator<{}> {
   }
 }
 
+export function* createOne(action: any): IterableIterator<{}> {
+  let { pokemon } = action.payload;
+  const serviceUrl = yield select(getServiceUrl);
+  try {
+    const value = yield call(createPokemonValue, serviceUrl, pokemon);
+    yield put(createPokemon.success( value ));
+  } catch (e) {
+    yield put(createPokemon.failure(e));
+  }
+}
+
 export function* watchGetPokemon(): SagaIterator {
   yield takeEvery(GET_POKEMON.REQUEST, getAll);
 }
@@ -78,4 +110,8 @@ export function* watchGetPokemon(): SagaIterator {
 
 export function* watchDeletePokemon(): SagaIterator {
   yield takeEvery(DELETE_POKEMON.REQUEST, deleteOne);
+}
+
+export function* watchCreateItem(): SagaIterator {
+  yield takeEvery(CREATE_POKEMON.REQUEST, createOne);
 }
