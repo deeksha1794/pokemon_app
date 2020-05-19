@@ -1,7 +1,7 @@
 ### Project Description
 
 This is a pokemon app where we can find details about Pokemon as well as we can also add new one and delete them.<br />
-For building this application I have use ##### React JS, ##### Redux sagas, ##### Redux form, ##### Reactstrap and ##### JSON server(For making Json as API).
+For building this application I have use ##### React JS, ####Redux sagas, #####Redux form, #####Reactstrap and #####JSON server(For making Json as API).
 
 
 ## Available Scripts
